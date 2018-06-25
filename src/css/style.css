@@ -1,0 +1,221 @@
+header {
+    width: 100%;
+    padding: 5px;
+    margin: 5px;
+    height: 15%;
+
+    
+}
+
+header h1 {
+    width: 100%
+   width: 190px;
+    height: 45px;
+    text-align: center;
+  }
+
+header h1 a {
+   text-decoration: none;
+}
+
+#header {
+    position: relative;
+    width: 30%;
+    height: 250px;
+    border: 1px solid grey;
+    padding: 25px;
+    margin: 25px;
+    position: absolute;
+    left: 35%;
+    top:15%;
+    
+    
+}
+
+#header form {
+    position: absolute;
+    float: right; 
+    margin-right: 30px; 
+    height: 20%; 
+    padding: 8px 8px;
+    max-width: 100%;
+}
+
+/*
+#header form h2 {
+    position: absolute;
+    display: inline-block;
+   
+*/
+    
+    
+}
+
+
+#header form label {
+    display: inline-block;
+    margin: 0 2px;
+    
+}
+
+#header #loginForm {
+    position: absolute;
+    
+}
+
+
+#header #loginForm #userName,
+#header form #password {
+   
+  
+    width: 100%;
+    border: 1px solid #eee;
+    padding: 3px 0 3px 0;
+    margin-bottom: 15px;
+    top: 50%;
+}
+
+#header form input {
+
+}
+#header form #btnLoginSubmit,
+#header form #btnLoginReset {
+    
+    width: 45%;
+    text-align: center;
+    height: 23px;
+    /*vertical-align: bottom;
+    
+    background: white; 
+    color: black;
+    border: 1px solid black;
+    -moz-border-radius: 5px;    
+    border-radius: 5px;
+    margin-right: 25px;
+    max-width: 100%;
+    max-height: 100%;*/
+   
+    
+    
+}
+
+#header form #btnLoginSubmit{
+/*   position: absolute;*/
+    
+}
+
+#header form #btnLoginReset{
+/*    position: absolute;*/
+
+}
+
+#header form .buttons {
+    position: absolute;
+/*   position: relative;*/
+   display: inline-block;
+   margin: 5px;
+   width: 90%; 
+    height: 40%;
+    max-height: 100%
+  
+    
+}
+
+
+#header form .buttons #btnLoginSubmit {
+   
+}
+
+#header form .buttons #btnLoginReset{
+   
+}
+
+
+#errorMsg {
+    position: absolute;
+    display: inline-block;
+    top: 200px;
+    color: red;
+}
+
+#searchHeader {
+    
+}
+
+#searchHeader form {
+    text-align: center;
+    font-size: 25px;
+    
+   
+    
+}
+
+#searchHeader form #autocomplete{
+    width:70%;
+    height: 30px;
+    
+} 
+
+#searchHeader form .ion-ios-search {
+    font-size: 25px;
+    
+}
+#resultContainer {
+    top: 200px;
+    position: relative;
+    display: inline-block;
+    width: 500px;
+    height: 500px;
+    
+}
+
+
+
+#resultContainer #itemImage {
+  
+    display: inline-block;
+    position: absolute;
+    float: left;
+   top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: 300px;
+    height: 150px;
+   
+    
+}
+
+#resultContainer #itemImage #carImg {
+    
+    display: inline-block;
+    top: 10px;
+    left: 10px,
+    right: 10px;
+    bottom: 10px;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+   
+}
+
+#resultContainer #itemName {
+   position: absolute;
+    font-size: 25px;
+    right: 50px;
+    text-decoration: underline
+    
+    }
+
+#resultContainer #itemPrice {
+    position: absolute;
+    display: inline-block;
+    left: 400px;
+    top: 50px;
+}
+#resultContainer #itemDescription {
+    position: absolute;
+    display: inline-block;
+    top: 200px; 
+    left: 10px;
+}
