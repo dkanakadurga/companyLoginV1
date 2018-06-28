@@ -219,3 +219,37 @@ header h1 a {
     top: 200px; 
     left: 10px;
 }
+table {
+    width: 100%;
+}
+displayCheckout tr {
+    border: 1px solid black;
+}
+td img{
+    height: 50px;
+    
+}
+
+#resultContainer #AddBtn {
+    position: absolute;
+    display: inline-block;
+    top:200px;
+    left:390px;
+}
+/*
+#resultContainer #AddToCart #add {
+    display: none;
+height: 30px;
+width: 150px;
+   
+}*/
+#displayCheckout{
+    border: 2px, solid, black;
+    margin: 10px;
+    margin-right: 20px;
+}
+#displayCheckout #selectImage{
+    height: 150px;
+    width: 150px;
+   
+}

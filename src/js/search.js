@@ -28,7 +28,8 @@ $('#autocomplete').autocomplete({
     },
     select: function( event, ui ) {
         obj = ui.item.object;
-        displayItem(obj);
+//         window.location.href = "http://localhost:49980/api/Authentication/Search?searchTerm="  + obj.Name
+      displayItem(obj);
     },
     
     minLength: 2,
@@ -48,7 +49,19 @@ function displayItem(obj){
     var imageUrl = "../img/"+image;
     $("#carImg").attr("src", imageUrl );
 
-}
+    var $input = $('<input type="button" id="AddToCart" value="Add to cart" />');
+    $input.appendTo($("#AddBtn"));
+    $("#AddToCart").click(function(){
+       window.location.href=
+           "../Html/checkout1.html?itemName=" +obj.Name +"&itemPrice=" +obj.Price +"&carImg=" +obj.ImageId;
+ 
+//       window.location.href = "../Html/checkout1.html"
+//        $("#selectName").html(obj.Name);
+//         $("#selectPrice").html(obj.Price);
+//        $("#selectImage").attr("src", imageUrl);
+    })
+                         }
+
     
 
 
