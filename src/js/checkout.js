@@ -12,12 +12,11 @@ $( document ).ready(function() {
     var itemImage = getUrlParameter("carImg");
     $("#selectName").html(itemName);
     $("#selectPrice").html(itemPrice);
-     $("#selectedImage").attr("src", "../img/" +itemImage +".jpg");
     
+    var Img= "../img/"+itemImage;
+    console.log(Img);
+     $("#selectedImage").attr("src", Img);
     
-    
-//$("#selectName").html(itemName);
-//$("#selectPrice").html(obj.Price);
-//$("#selectImage").attr("src", imageUrl);
+ 
+  });
 
-});

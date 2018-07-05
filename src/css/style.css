@@ -161,11 +161,12 @@ header h1 a {
     
 }
 #resultContainer {
-    top: 200px;
+    top: 100px;
     position: relative;
     display: inline-block;
     width: 500px;
     height: 500px;
+    left: 20%;
     
 }
 
@@ -253,3 +254,24 @@ width: 150px;
     width: 150px;
    
 }
+
+#div1 {
+ 
+  position: absolute;
+  text-align: center;
+  top: 310px;
+  width: 80%;
+  left: 10%;
+    
+    
+}
+
+#sortBy {
+    
+    position: absolute;
+    top: 280px;
+    left: 40%;
+}
+
+
+ 
