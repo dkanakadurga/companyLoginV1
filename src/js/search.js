@@ -14,16 +14,11 @@
 
 function getRelItems(selectedValue) {
    $.getJSON("http://localhost:51017/api/search/relatedSearch?selectedItem=" + selectedValue, function (data) {
-    response($.map(data, function (value, key) {
-
-        return {
-            label: value.name,
-            value: value.name,
-            object: value
-        };
-    }));
+       for(i=0 ; i<data.length ; i++){
+          data[i].priceNum = parseFloat(data[i].price);
+          }
+      displayRelatedItemsWithArray(data);
 });
-    
 }
 
 function autoCompleteSource(request, response) {
@@ -40,11 +35,7 @@ $.getJSON("http://localhost:51017/api/search?searchTerm=" + request.term, functi
 });
 }
 
-function displayRelatedItems() {
-    var sortType = $('#sortBy').val();
-     var RelItems = getRelItems();
-    console.log(RelItems);
-}
+
 
 
 $(document).ready(function() {
@@ -55,7 +46,7 @@ $('#autocomplete').autocomplete({
     select: function( event, ui ) {
             obj = ui.item.object;
             displayItem(obj);
-            displayRelatedItems();
+            displayRelatedItems(obj.name);
             $("#sortBy").show();
     },
     
@@ -89,56 +80,71 @@ function displayItem(obj){
     })
 }
 
-//function displayRelatedItems() {
-//    
+//function displayRelatedItems(selectedValue) {
 //    var sortType = $('#sortBy').val();
-//    var jsonArray = getRelItems();
-//    jsonArray = sortByKey(jsonArray, sortType);
-//    var tbl=$("<table/>").attr("id","mytable");
-//    $("#div1").contents().remove();
-//    $("#div1").append(tbl);
-//    
-//        for(var i=0;i<jsonArray.length;i++) {
-//        var tr="<tr>";
-//        var td1="<td>"+jsonArray[i]["Name"]+"</td>";
-//        var td2="<td>"+jsonArray[i]["Price"]+"</td>";
-//        var itemImage = "../img/"+jsonArray[i]["ImageName"];
-//        console.log(Image);
-//        var td3='<td><img src="'+itemImage+'"></td>';
-//        var btnId='Add'+i;
-//        var b = "<td>"+'<input id = '+btnId+' class = "AddBtn" type = "button" value = "Add to cart" />'+"<td></tr>"
-//        
-//      
-//        
-//       $("#mytable").append(tr+td1+td2+td3+b);
-//              $("#mytable").css("border", "1px solid #000");
-//    }
-//        
-//
-//        $(".AddBtn").on('click', function(e){
-//            var jsonArray = getRelatedItems();
-//             jsonArray = sortByKey(jsonArray, sortType);
-//            var x= e.currentTarget.id;
-//            var y= x.split(/(\d+)/)[1];
-//          
-//            console.log(y);
-//
-//          
-//            
-//       window.location.href=
-//           "../Html/checkout1.html?itemName=" +jsonArray[y]["Name"]+"&itemPrice=" +jsonArray[y]["Price"] +"&carImg=" +jsonArray[y]["ImageName"];
-//    
-//    });
-//        
-//         
- 
-   
- //                   }
+//     var RelItems = getRelItems(selectedValue);
+//   
+//}
+
+function displayRelatedItems(selectedValue) {
+    if(!selectedValue){
+        selectedValue = $("#sortBy").val();
+    }
+    
+    
+    getRelItems(selectedValue);
+    
+    
+}
+
+function displayRelatedItemsWithArray(jsonArray){
+    var sortType = $('#sortBy').val();
+    jsonArray = sortByKey(jsonArray, sortType);
+    
+    var tbl=$("<table/>").attr("id","mytable");
+    $("#div1").contents().remove();
+    $("#div1").append(tbl);
+    
+        for(var i=0;i<jsonArray.length;i++) {
+        var tr="<tr>";
+        var td1="<td>"+jsonArray[i]["name"]+"</td>";
+        var td2="<td>"+jsonArray[i]["price"]+"</td>";
+        var itemImage = "../img/"+jsonArray[i].imageId+".jpg";
+        console.log(itemImage);
+        var td3='<td><img src="'+itemImage+'"></td>';
+        var btnId='Add'+i;
+        var b = "<td>"+'<input id = '+btnId+' class = "AddBtn" type = "button" value = "Add to cart" />'+"<td></tr>"
+        
+      
+        
+       $("#mytable").append(tr+td1+td2+td3+b);
+              $("#mytable").css("border", "1px solid #000");
+    }
+        
+
+        $(".AddBtn").on('click', function(e){
+            var jsonArray = getRelatedItems();
+             jsonArray = sortByKey(jsonArray, sortType);
+            var x= e.currentTarget.id;
+            var y= x.split(/(\d+)/)[1];
+          
+            console.log(y);
+
+          
+            
+       window.location.href=
+           "../Html/checkout1.html?itemName=" +jsonArray[y]["name"]+"&itemPrice=" +jsonArray[y]["price"] +"&carImg=" +jsonArray[y]["ImageId"];
+    
+    });
+}
 
 
 function sortByKey(array, key) {
+    console.log(array);
+    console.log(key);
     return array.sort(function(a, b) {
-        var x = a[key]; var y = b[key];
+        var x = a[key];
+        var y = b[key];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
 }
