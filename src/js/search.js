@@ -1,24 +1,39 @@
 
 
-function search() {
-    var obj = { };
-    $.ajax({
-        url: "http://localhost:49980/api/Authentication/Search?searchTerm=Test",
-      
-        type: "GET",
-        data: {Name, Description, ImageId, Price}
-    
-        
-    }) 
-}
-function autoCompleteSource(request, response) {
-        
-$.getJSON("http://localhost:49980/api/Authentication/Search?searchTerm=" + request.term, function (data) {
+//function search() {
+//    var obj = { };
+//    $.ajax({
+//        url: "http://localhost:51017/api/search?searchTerm=Test",
+//      
+//        type: "GET",
+//        data: {Name, Description, ImageId, Price}
+//    
+//        
+//    }) 
+//}
+
+function getRelItems(selectedValue) {
+   $.getJSON("http://localhost:51017/api/search/relatedSearch?selectedItem=" + selectedValue, function (data) {
     response($.map(data, function (value, key) {
 
         return {
-            label: value.Name,
-            value: value.Name,
+            label: value.name,
+            value: value.name,
+            object: value
+        };
+    }));
+});
+    
+}
+
+function autoCompleteSource(request, response) {
+        
+$.getJSON("http://localhost:51017/api/search?searchTerm=" + request.term, function (data) {
+    response($.map(data, function (value, key) {
+
+        return {
+            label: value.name,
+            value: value.name,
             object: value
         };
     }));
@@ -26,56 +41,11 @@ $.getJSON("http://localhost:49980/api/Authentication/Search?searchTerm=" + reque
 }
 
 function displayRelatedItems() {
-    
     var sortType = $('#sortBy').val();
-    var jsonArray = getRelatedItems();
-    jsonArray = sortByKey(jsonArray, sortType);
-    var tbl=$("<table/>").attr("id","mytable");
-    $("#div1").contents().remove();
-    $("#div1").append(tbl);
-    
-//    
-//     var image = obj.ImageId + '.jpg';
-//   // var image = "xyz" + '.jpg';
-//    var imageUrl = "../img/"+image;
-//    $("#carImg").attr("src", imageUrl );
-   
-    for(var i=0;i<jsonArray.length;i++) {
-        var tr="<tr>";
-        var td1="<td>"+jsonArray[i]["Name"]+"</td>";
-        var td2="<td>"+jsonArray[i]["Price"]+"</td>";
-        var itemImage = "../img/"+jsonArray[i]["ImageName"];
-        console.log(Image);
-        var td3='<td><img src="'+itemImage+'"></td>';
-        var btnId='Add'+i;
-        var b = "<td>"+'<input id = '+btnId+' class = "AddBtn" type = "button" value = "Add to cart" />'+"<td></tr>"
-        
-      
-        
-       $("#mytable").append(tr+td1+td2+td3+b);
-              $("#mytable").css("border", "1px solid #000");
-    }
-        
+     var RelItems = getRelItems();
+    console.log(RelItems);
+}
 
-        $(".AddBtn").on('click', function(e){
-            var jsonArray = getRelatedItems();
-             jsonArray = sortByKey(jsonArray, sortType);
-            var x= e.currentTarget.id;
-            var y= x.split(/(\d+)/)[1];
-          
-            console.log(y);
-
-          
-            
-       window.location.href=
-           "../Html/checkout1.html?itemName=" +jsonArray[y]["Name"]+"&itemPrice=" +jsonArray[y]["Price"] +"&carImg=" +jsonArray[y]["ImageName"];
-    
-    });
-        
-         
- 
-   
-                    }
 
 $(document).ready(function() {
 $("#sortBy").hide();
@@ -99,10 +69,10 @@ $('#autocomplete').autocomplete({
 
 function displayItem(obj){
      console.log(obj);
-    $("#itemName").html(obj.Name);
-    $("#itemDescription").html(obj.Description);
-    $("#itemPrice").html(obj.Price);
-    var image = obj.ImageId + '.jpg';
+    $("#itemName").html(obj.name);
+    $("#itemDescription").html(obj.description);
+    $("#itemPrice").html(obj.price);
+    var image = obj.imageId + '.jpg';
    // var image = "xyz" + '.jpg';
     var imageUrl = "../img/"+image;
     $("#carImg").attr("src", imageUrl );
@@ -111,13 +81,60 @@ function displayItem(obj){
     $input.appendTo($("#AddBtn"));
     
     $("#AddToCart").click(function(){
-        var itemImage = obj.ImageId+".jpg";
+        var itemImage = obj.imageId+".jpg";
        window.location.href=
-           "../Html/checkout1.html?itemName=" +obj.Name +"&itemPrice=" +obj.Price +"&carImg=" +itemImage;
+           "../Html/checkout1.html?itemName=" +obj.name +"&itemPrice=" +obj.price +"&carImg=" +itemImage;
  
 
     })
 }
+
+//function displayRelatedItems() {
+//    
+//    var sortType = $('#sortBy').val();
+//    var jsonArray = getRelItems();
+//    jsonArray = sortByKey(jsonArray, sortType);
+//    var tbl=$("<table/>").attr("id","mytable");
+//    $("#div1").contents().remove();
+//    $("#div1").append(tbl);
+//    
+//        for(var i=0;i<jsonArray.length;i++) {
+//        var tr="<tr>";
+//        var td1="<td>"+jsonArray[i]["Name"]+"</td>";
+//        var td2="<td>"+jsonArray[i]["Price"]+"</td>";
+//        var itemImage = "../img/"+jsonArray[i]["ImageName"];
+//        console.log(Image);
+//        var td3='<td><img src="'+itemImage+'"></td>';
+//        var btnId='Add'+i;
+//        var b = "<td>"+'<input id = '+btnId+' class = "AddBtn" type = "button" value = "Add to cart" />'+"<td></tr>"
+//        
+//      
+//        
+//       $("#mytable").append(tr+td1+td2+td3+b);
+//              $("#mytable").css("border", "1px solid #000");
+//    }
+//        
+//
+//        $(".AddBtn").on('click', function(e){
+//            var jsonArray = getRelatedItems();
+//             jsonArray = sortByKey(jsonArray, sortType);
+//            var x= e.currentTarget.id;
+//            var y= x.split(/(\d+)/)[1];
+//          
+//            console.log(y);
+//
+//          
+//            
+//       window.location.href=
+//           "../Html/checkout1.html?itemName=" +jsonArray[y]["Name"]+"&itemPrice=" +jsonArray[y]["Price"] +"&carImg=" +jsonArray[y]["ImageName"];
+//    
+//    });
+//        
+//         
+ 
+   
+ //                   }
+
 
 function sortByKey(array, key) {
     return array.sort(function(a, b) {

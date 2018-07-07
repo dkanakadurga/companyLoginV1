@@ -8,14 +8,14 @@ function displayWithAjax() {
    var obj = JSON.stringify(obj);
     $.ajax({
         type: "POST",
-        url: "http://localhost:49980/api/Authentication/ValidateUser",
+        url: "http://localhost:51017/api/Authentication/ValidateUser",
         data: obj,
         crossDomain: true,
         contentType: "application/json; charset=utf-8", 
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            if(data.ValidUser === true && data.Reason === "Validated"){
+            if(data.validUser === true && data.reason === "Validated"){
             window.location.href = "../Html/myPage.html"
             }
             else {
@@ -23,8 +23,8 @@ function displayWithAjax() {
             }    
             
         },
-        error: function () {
-            alert("error");
+        error: function (e) {
+            console.log(e);
            
         }
     });
@@ -35,7 +35,7 @@ function displayWithPromise(){
           var obj = {};
      obj.userName = $("#userName").val();
      obj.password = $("#password").val();                       
-        axios.post("http://localhost:49980/api/Authentication/ValidateUser",  obj , {
+        axios.post("http://localhost:51017/api/Authentication/ValidateUser",  obj , {
             headers: {
                 'content-Type': 'application/json;charset=UTF-8',
               'Access-Control-Allow-Origin': 'localhost:8080',
